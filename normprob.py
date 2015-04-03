@@ -83,8 +83,10 @@ while True: #this while statement is the main program
     answer = calculator(meanp,xval,stdevs)
     area = zarea(zpos)
     actarea = subarea(z,area)
+    tails = int(((.5 - area) * 10000)+.5) / 10000.0
     print ('\nYour z score is going to be ', z, '.', sep='')
     print ('\n', 'P(', xval, ') = ', answer, '. And additionally the area from the mean of ', meanp, ' to ', xval, ' should be ', area, '.\n', sep='')
+    print ('The area corresponding to the complement of two tails (each containing ', tails, ') is ', area*2, '.\n', sep='')
     print ('Moreover, the area extending from the left tail to ', xval, ' is ', actarea, '.\n', sep='')
     calc_cont = input('Do you want to end the calculator? (Type 1 to end the program, or else it will continue.)\n')
     if calc_cont == '1':
