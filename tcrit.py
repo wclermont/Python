@@ -54,7 +54,7 @@ def ssize (): #this function validates the input
 
 def alphaf (): #this function validates the input
     while True:
-        print ('\nEnter the alpha value between 0 and 1 which corresponds to the right tail')
+        print ('\nEnter the alpha value between 0 and 1 which corresponds to a tail')
         try:
             y = float(input('Type a positive decimal between 0 and 1: '))
             if y == 0 or y < 0 or y > 1:
@@ -80,14 +80,14 @@ def tailrev(tail,alpha):
     if tail == '3': #both
         y = alpha/2
     elif tail == '2': #lower
-        y = 1 - alpha
+        y = alpha
     else: #upper
         y = alpha
     return (y)
 
 while True: #this while statement is the main program
-    print ('\nThis program can calculate the t score, the t critical value and p value for the right upper tail.')
-    print ('This program will also conduct a basic one sample one-tailed hypothesis test about the population mean, population standard deviation unknown.')
+    print ('\nThis program can calculate the t score, the t critical value and p value for a tail.')
+    print ('This program will also conduct a basic one sample hypothesis test about the population mean, population standard deviation unknown.')
     alpha = alphaf()
     tails = tailchoice()
     revalpha = tailrev(tails,alpha)
@@ -109,10 +109,10 @@ while True: #this while statement is the main program
     if tails == '1':
         pval = t.sf(tval, df)
     elif tails == '2':
-        pval = 1 - t.sf(tval, df)
+        pval = 1.0000 - t.sf(tval, df)
     else:
         pval = t.sf(tval, df)
-        pval2 = 1 - t.sf(tval, df)
+        pval2 = 1.0000 - t.sf(tval, df)
         
     print ('The calculated t stat for hypothesis tests about a population mean, population standard deviation unknown is ', tval, '.', sep = '')
     print ('And its corresponding p value is ', pval, '.\n', sep='')
@@ -135,18 +135,20 @@ while True: #this while statement is the main program
     if tails == '1':
         if tval > critval:
             print (tval, ' > ', critval, ' therefore, we can reject the null hypothesis and accept the alternative hypothesis.\n', sep='')
-        elif tval == alpha:
+        elif tval == critval:
             print (tval, ' = ', critval, ' therefore, we can reject the null hypothesis and accept the alternative hypothesis.\n', sep='')
         else:
             print (tval, ' < ', critval, ' therefore, we fail to reject the null hypothesis and have insufficient evidence.\n', sep='')
 
     if tails == '2':
-        if tval < critval:
-            print (tval, ' < ', critval, ' therefore, we can reject the null hypothesis and accept the alternative hypothesis.\n', sep='')
-        elif tval == alpha:
-            print (tval, ' = ', critval, ' therefore, we can reject the null hypothesis and accept the alternative hypothesis.\n', sep='')
+        tval2 = abs(tval)
+        critval2 = abs(critval)
+        if tval2 > critval2:
+            print ('The absolute value of ', tval, ' > ', critval, ' therefore, we can reject the null hypothesis and accept the alternative hypothesis.\n', sep='')
+        elif tval2 == critval2:
+            print ('The absolute value of ', tval, ' = ', critval, ' therefore, we can reject the null hypothesis and accept the alternative hypothesis.\n', sep='')
         else:
-            print (tval, ' > ', critval, ' therefore, we fail to reject the null hypothesis and have insufficient evidence.\n', sep='')
+            print ('The absolute value of ', tval, ' > ', critval, ' therefore, we fail to reject the null hypothesis and have insufficient evidence.\n', sep='')
 
     if tails == '3':
         tval2 = abs(tval)
