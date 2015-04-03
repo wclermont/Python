@@ -1,3 +1,6 @@
+# Coder: Woody Clermont
+# Calculation of t critical value and t score, as well as p value.
+
 from scipy.stats import t
 
 def stdevf (): #this function validates the input
